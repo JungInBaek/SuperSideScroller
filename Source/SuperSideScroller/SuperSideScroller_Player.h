@@ -23,6 +23,8 @@ protected:
 	void Sprint();
 	void StopSprinting();
 
+	void ThrowProjectile();
+
 private:
 	bool bIsSprinting;
 
@@ -32,4 +34,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Input")
 	class UInputAction* IA_Sprint;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	class UInputAction* IA_Throw;
 };
