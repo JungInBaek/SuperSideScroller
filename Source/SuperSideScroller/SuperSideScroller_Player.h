@@ -22,11 +22,19 @@ protected:
 
 	void Sprint();
 	void StopSprinting();
-
 	void ThrowProjectile();
+
+public:
+	void SpawnProjectile();
 
 private:
 	bool bIsSprinting;
+
+	UPROPERTY(EditAnywhere)
+	class UAnimMontage* ThrowMontage;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class APlayerProjectile> PlayerProjectile;
 
 protected:
 	UPROPERTY(EditAnywhere, Category = "Input")
