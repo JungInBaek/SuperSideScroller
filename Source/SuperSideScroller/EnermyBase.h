@@ -14,4 +14,6 @@ class SUPERSIDESCROLLER_API AEnermyBase : public ASuperSideScrollerCharacter
 {
 	GENERATED_BODY()
 	
+public:
+	void DestroyEnermy();
 };

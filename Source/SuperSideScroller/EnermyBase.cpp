@@ -3,3 +3,8 @@
 
 #include "EnermyBase.h"
 
+
+void AEnermyBase::DestroyEnermy()
+{
+	Destroy();
+}
