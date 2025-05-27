@@ -16,4 +16,11 @@ class SUPERSIDESCROLLER_API AEnermyBase : public ASuperSideScrollerCharacter
 	
 public:
 	void DestroyEnermy();
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	class UParticleSystem* DeathEffect;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	class USoundBase* DeathSound;
 };

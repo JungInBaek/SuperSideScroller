@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "PlayerProjectile.generated.h"
 
+
 UCLASS()
 class SUPERSIDESCROLLER_API APlayerProjectile : public AActor
 {
@@ -34,4 +35,16 @@ private:
 	// 스태틱 메시 컴포넌트
 	UPROPERTY(EditAnywhere, Category = Projectile)
 	class UStaticMeshComponent* MeshComp;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = Sound)
+	class UAudioComponent* ProjectileMovementSound;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
+	class UParticleSystemComponent* ProjectileEffect;
+
+	UPROPERTY(EditDefaultsOnly, Category = Destory)
+	class UParticleSystem* DestroyEffect;
+
+	UPROPERTY(EditDefaultsOnly, Category = Destory)
+	class USoundBase* DestroySound;
 };
