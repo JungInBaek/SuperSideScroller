@@ -15,9 +15,14 @@ public:
 	// Sets default values for this actor's properties
 	APickableActor_Base();
 
+	UFUNCTION()
+	void BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	virtual void PlayerPickedUp(class ASuperSideScroller_Player* Player);
 
 protected:
 	UPROPERTY(VisibleDefaultsOnly, Category = PickableItem)
@@ -28,4 +33,7 @@ protected:
 
 	UPROPERTY(VisibleDefaultsOnly, Category = PickableItem)
 	class URotatingMovementComponent* RotationComp;
+
+	UPROPERTY(EditAnywhere, Category = PickableItem)
+	class USoundBase* PickupSound;
 };

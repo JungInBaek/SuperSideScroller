@@ -5,6 +5,8 @@
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/RotatingMovementComponent.h"
+#include "SuperSideScroller_Player.h"
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values
@@ -29,6 +31,26 @@ APickableActor_Base::APickableActor_Base()
 void APickableActor_Base::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	CollisionComp->OnComponentBeginOverlap.AddDynamic(this, &APickableActor_Base::BeginOverlap);
+}
+
+void APickableActor_Base::PlayerPickedUp(ASuperSideScroller_Player* Player)
+{
+	if (UWorld* World = GetWorld())
+	{
+		if (PickupSound)
+		{
+			UGameplayStatics::SpawnSoundAtLocation(World, PickupSound, GetActorLocation());
+		}
+	}
+	Destroy();
+}
+
+void APickableActor_Base::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (ASuperSideScroller_Player* Player = Cast<ASuperSideScroller_Player>(OtherActor))
+	{
+		PlayerPickedUp(Player);
+	}
 }
 

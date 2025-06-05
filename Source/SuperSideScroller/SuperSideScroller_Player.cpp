@@ -18,6 +18,16 @@ ASuperSideScroller_Player::ASuperSideScroller_Player()
 	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
 }
 
+void ASuperSideScroller_Player::IncrementNumberOfCollectables(int32 Value)
+{
+	if (Value <= 0)
+	{
+		return;
+	}
+	NumberOfCollectables += Value;
+	UE_LOG(LogTemp, Warning, TEXT("Number of Coins: %d"), NumberOfCollectables);
+}
+
 void ASuperSideScroller_Player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
