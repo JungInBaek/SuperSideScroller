@@ -6,9 +6,7 @@
 #include "SuperSideScrollerCharacter.h"
 #include "SuperSideScroller_Player.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class SUPERSIDESCROLLER_API ASuperSideScroller_Player : public ASuperSideScrollerCharacter
 {
@@ -24,6 +22,8 @@ public:
 
 	void IncrementNumberOfCollectables(int32 Value);
 
+	void IncreaseMovementPowerup();
+
 protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -32,6 +32,8 @@ protected:
 	void StopSprinting();
 
 	void ThrowProjectile();
+
+	void EndPowerup();
 
 private:
 	bool bIsSprinting;
@@ -43,6 +45,10 @@ private:
 	TSubclassOf<class APlayerProjectile> PlayerProjectile;
 
 	int32 NumberOfCollectables;
+
+	FTimerHandle PowerupHandle;
+
+	bool bHasPowerupActive;
 
 protected:
 	UPROPERTY(EditAnywhere, Category = "Input")
