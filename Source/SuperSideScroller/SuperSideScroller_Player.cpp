@@ -42,6 +42,18 @@ void ASuperSideScroller_Player::IncreaseMovementPowerup()
 	}
 }
 
+void ASuperSideScroller_Player::DecreaseMovementPowerdown()
+{
+	bHasPowerdownActive = true;
+	GetCharacterMovement()->MaxWalkSpeed = 150.0f;
+	GetCharacterMovement()->JumpZVelocity = 500.0f;
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		World->GetTimerManager().SetTimer(PowerupHandle, this, &ASuperSideScroller_Player::EndPowerdown, 8.0f, false);
+	}
+}
+
 void ASuperSideScroller_Player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -70,6 +82,10 @@ void ASuperSideScroller_Player::Sprint()
 		if (bHasPowerupActive)
 		{
 			GetCharacterMovement()->MaxWalkSpeed = 900.0f;
+		}
+		else if (bHasPowerdownActive)
+		{
+			return;
 		}
 		else
 		{
@@ -112,6 +128,18 @@ void ASuperSideScroller_Player::EndPowerup()
 	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
 	GetCharacterMovement()->JumpZVelocity = 1000.0f;
 
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		World->GetTimerManager().ClearTimer(PowerupHandle);
+	}
+}
+
+void ASuperSideScroller_Player::EndPowerdown()
+{
+	bHasPowerdownActive = false;
+	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
+	GetCharacterMovement()->JumpZVelocity = 1000.0f;
 	UWorld* World = GetWorld();
 	if (World)
 	{

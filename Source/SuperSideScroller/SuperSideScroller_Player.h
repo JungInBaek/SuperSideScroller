@@ -24,6 +24,8 @@ public:
 
 	void IncreaseMovementPowerup();
 
+	void DecreaseMovementPowerdown();
+
 protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -34,6 +36,8 @@ protected:
 	void ThrowProjectile();
 
 	void EndPowerup();
+
+	void EndPowerdown();
 
 private:
 	bool bIsSprinting;
@@ -49,6 +53,8 @@ private:
 	FTimerHandle PowerupHandle;
 
 	bool bHasPowerupActive;
+
+	bool bHasPowerdownActive;
 
 protected:
 	UPROPERTY(EditAnywhere, Category = "Input")
