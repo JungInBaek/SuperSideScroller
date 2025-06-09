@@ -31,6 +31,7 @@ APickableActor_Base::APickableActor_Base()
 void APickableActor_Base::BeginPlay()
 {
 	Super::BeginPlay();
+
 	CollisionComp->OnComponentBeginOverlap.AddDynamic(this, &APickableActor_Base::BeginOverlap);
 }
 
