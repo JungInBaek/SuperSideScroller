@@ -26,7 +26,11 @@ void ASuperSideScroller_Player::IncrementNumberOfCollectables(int32 Value)
 		return;
 	}
 	NumberOfCollectables += Value;
-	UE_LOG(LogTemp, Warning, TEXT("Number of Coins: %d"), NumberOfCollectables);
+	//UE_LOG(LogTemp, Warning, TEXT("Number of Coins: %d"), NumberOfCollectables);
+	if (NumberOfCollectables >= 10 && NumberOfCollectables % 10 == 0)
+	{
+		IncreaseMovementPowerup();
+	}
 }
 
 void ASuperSideScroller_Player::IncreaseMovementPowerup()
