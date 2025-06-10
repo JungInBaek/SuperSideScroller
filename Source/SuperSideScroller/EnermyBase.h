@@ -15,7 +15,12 @@ class SUPERSIDESCROLLER_API AEnermyBase : public ASuperSideScrollerCharacter
 	GENERATED_BODY()
 	
 public:
+	void BeginPlay() override;
+
 	void DestroyEnermy();
+
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)

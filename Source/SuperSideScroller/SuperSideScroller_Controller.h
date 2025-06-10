@@ -14,4 +14,16 @@ class SUPERSIDESCROLLER_API ASuperSideScroller_Controller : public APlayerContro
 {
 	GENERATED_BODY()
 	
+public:
+	void ShowRestartWidget();
+
+	void HideRestartWidget();
+
+public:
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<class URestartWidget> BP_RestartWidget;
+
+private:
+	UPROPERTY()
+	class URestartWidget* RestartWidget;
 };

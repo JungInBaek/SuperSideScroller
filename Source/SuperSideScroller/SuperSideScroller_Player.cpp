@@ -11,6 +11,8 @@
 #include "Engine/World.h"
 #include "Components/SphereComponent.h"
 #include "TimerManager.h"
+#include "Kismet/GameplayStatics.h"
+#include "SuperSideScroller_Controller.h"
 
 
 ASuperSideScroller_Player::ASuperSideScroller_Player()
@@ -56,6 +58,33 @@ void ASuperSideScroller_Player::DecreaseMovementPowerdown()
 	{
 		World->GetTimerManager().SetTimer(PowerupHandle, this, &ASuperSideScroller_Player::EndPowerdown, 8.0f, false);
 	}
+}
+
+void ASuperSideScroller_Player::DestroyPlayer()
+{
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		World->GetTimerManager().ClearTimer(PowerupHandle);
+		if (DeathEffect)
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(World, DeathEffect, GetActorTransform());
+		}
+		if (DeathSound)
+		{
+			UGameplayStatics::SpawnSoundAtLocation(World, DeathSound, GetActorLocation());
+		}
+	}
+	if (GetMesh()->GetAnimInstance())
+	{
+		GetMesh()->GetAnimInstance()->Montage_Stop(0.2f, ThrowMontage);
+	}
+
+	if (ASuperSideScroller_Controller* PlayerController = Cast<ASuperSideScroller_Controller>(GetController()))
+	{
+		PlayerController->ShowRestartWidget();
+	}
+	//Destroy();
 }
 
 void ASuperSideScroller_Player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

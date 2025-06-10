@@ -26,6 +26,8 @@ public:
 
 	void DecreaseMovementPowerdown();
 
+	void DestroyPlayer();
+
 protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -65,4 +67,11 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Input")
 	class UInputAction* IA_Throw;
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	class UParticleSystem* DeathEffect;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	class USoundBase* DeathSound;
 };
